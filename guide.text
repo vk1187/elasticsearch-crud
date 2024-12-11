@@ -1,0 +1,26 @@
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list
+sudo apt-get update
+sudo apt-get install elasticsearch -y
+sudo nano /etc/elasticsearch/elasticsearch.yml
+
+change the true to flase in the Enable security features   
+xpack.security.enabled: false
+xpack.security.enrollment.enabled: false
+
+
+sudo systemctl enable elasticsearch
+sudo systemctl start elasticsearch
+
+sudo systemctl status elasticsearch
+curl -X GET "http://localhost:9200/"
+
+kiwana---
+
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+
+sudo apt-get update && sudo apt-get install kibana
+sudo /bin/systemctl daemon-reload
+sudo /bin/systemctl enable kibana.service
+sudo systemctl start kibana.service
+sudo systemctl stop kibana.service
